@@ -1,0 +1,12 @@
+{
+  "name": "coopersystem-teste-iancampelo",
+  "displayName": "coopersystem-teste-iancampelo",
+  "expo": {
+    "name": "coopersystem-teste-iancampelo",
+    "slug": "coopersystem-teste-iancampelo",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
