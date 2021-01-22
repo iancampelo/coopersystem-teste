@@ -5,13 +5,9 @@ import {
   ActivityIndicator,
   Text,
   FlatList,
-  TouchableHighlight,
 } from 'react-native'
 import api from '../../util/api'
-import {normalizeMoneyString} from '../../util/functions'
-
-const indicadorCarenciaTrue = 'S'
-const indicadorCarenciaFalse = 'N'
+import InvestimentosItem from '../../components/InvestimentosItem'
 
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -31,39 +27,22 @@ const HomeScreen = ({ navigation }) => {
     <View>
       {
         isLoading ?
-          <View>
-            <Text style={[styles.loadingText]}>
+          <View style={styles.loadingText}>
+            <Text>
               Recebendo lista de investimentos...
             </Text>
             <ActivityIndicator size="large" />
           </View>
        :
           <View>
-            <Text>
+            <Text style={styles.title}>
               INVESTIMENTOS - R$
             </Text>
             <FlatList
               data={investimentos}
-              renderItem={
-                ({item: investimento}) =>
-                  <TouchableHighlight
-                    key={investimento.nome}
-                    disabled={investimento.indicadorCarencia === indicadorCarenciaTrue}
-                    activeOpacity={0.6}
-                    underlayColor="#DDDDDD"
-                    onPress={() =>
-                      navigation.navigate(
-                        'Resgate', {
-                          valorInvestimentos: investimento.saldoTotalDisponivel,
-                          acoes: investimento.acoes,
-                          nome: investimento.nome
-                        }
-                      )
-                    }>
-                    <Text style={styles.item}>
-                      {investimento.nome} - {investimento.objetivo} {normalizeMoneyString(investimento.saldoTotalDisponivel)}
-                    </Text>
-                  </TouchableHighlight>
+              keyExtractor={item => item.nome}
+              renderItem={({item}) =>
+                <InvestimentosItem investimento={item} navigation={navigation} />
               }
             />
           </View>
@@ -73,17 +52,17 @@ const HomeScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   justifyContent: "center"
-  // },
   loadingText: {
-    paddingBottom: 20
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 50
   },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+  title: {
+    padding: 15,
+    fontWeight: "bold",
+    color: "gray",
+    marginBottom: 10
   },
 });
 

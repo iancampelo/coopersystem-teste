@@ -3,12 +3,13 @@ import {
   View,
   StyleSheet,
   Text,
-  Button,
   FlatList,
   TouchableHighlight,
 } from 'react-native'
+
 import { percentualToValor, normalizeMoneyString, useForm } from '../../util/functions'
-import ResgateAcao from '../../components/ResgateAcao'
+import AcoesItem from '../../components/AcoesItem'
+import ResgateModal from '../../components/ResgateModal'
 
 const ResgateScreen = ({ navigation, route }) => {
   const valorTotal = route.params.valorInvestimentos
@@ -40,41 +41,31 @@ const ResgateScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <ResgateModal
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>RESGATE EFETUADO!</Text>
-            <Text>O valor solicitado estará em sua conta em até 5 dias úteis!</Text>
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate('Home')
-              }}
-            >
-              <Text style={styles.textStyle}>NOVO RESGATE</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
-      <Text>DADOS DO INVESTIMENTO</Text>
+        navigation={navigation}
+        title={'RESGATE EFETUADO!'}
+        text={'O valor solicitado estará em sua conta em até 5 dias úteis!'}
+        buttonText={'NOVO RESGATE'}
+      />
+      <Text style={styles.title}>DADOS DO INVESTIMENTO</Text>
       <View>
-        <Text>Nome {nomeInvestimento}</Text>
-        <Text>Saldo total disponível {normalizeMoneyString(valorTotal)}</Text>
+        <View style={styles.card}>
+          <Text style={styles.subtitle}>Nome</Text>
+          <Text>{nomeInvestimento}</Text>
+        </View>
+        <View style={styles.card}>
+          <Text style={styles.subtitle}>Saldo total disponível</Text>
+          <Text>{normalizeMoneyString(valorTotal)}</Text>
+        </View>
       </View>
-      <Text>RESGATE DO SEU JEITO</Text>
+      <Text style={styles.title}>RESGATE DO SEU JEITO</Text>
       <FlatList
         data={acoes}
+        keyExtractor={item => item.nome}
         renderItem={
           ({item: acao}) => 
-            <ResgateAcao
+            <AcoesItem
               acao={acao}
               limit={percentualToValor(valorTotal, acao.percentual)}
               changeHandler={changeHandler}
@@ -82,13 +73,14 @@ const ResgateScreen = ({ navigation, route }) => {
             />
         }
       />
-      <Text>Valor total a resgatar {normalizeMoneyString(valorTotalResgate)}</Text>
-      <Button
-        title="CONFIRMAR RESGATE"
-        style={styles.openButton}
+      <Text style={styles.title}>Valor total a resgatar {normalizeMoneyString(valorTotalResgate)}</Text>
+      <TouchableHighlight
+        style={isFormValid ? styles.defaultButton : styles.disabledButton}
         onPress={() => setModalVisible(true)}
         disabled={!isFormValid}
-      />
+      >
+        <Text style={styles.textStyle}>CONFIRMAR RESGATE</Text>
+      </TouchableHighlight>
     </View>
   )
 }
@@ -98,6 +90,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center"
   },
+  card: {
+    flex: 1,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    padding: 15,
+    backgroundColor: "white",
+  },
+  title: {
+    padding: 15,
+    fontWeight: "bold",
+    color: "gray",
+  },
+  subtitle: {
+    fontWeight: "bold",
+  },
   loadingText: {
     paddingBottom: 20
   },
@@ -106,42 +113,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
+  defaultButton: {
+    backgroundColor: '#fae128',
+    padding: 10,
+    elevation: 2
   },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
+  disabledButton: {
+    backgroundColor: 'gray',
     padding: 10,
     elevation: 2
   },
   textStyle: {
-    color: "white",
+    color: "#005aa5",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  }
 });
 
 export default ResgateScreen
