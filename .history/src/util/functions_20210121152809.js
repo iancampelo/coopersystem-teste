@@ -1,0 +1,1 @@
+<Text>TOTAL {valorTotal}</Text>
