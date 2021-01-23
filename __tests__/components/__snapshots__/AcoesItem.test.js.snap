@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly AcoesItem 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 100,
+      "marginBottom": 10,
+      "padding": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Ação
+    </Text>
+    <Text>
+      BBAS3
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Saldo acumulado
+    </Text>
+    <Text>
+      R$8,143.44
+    </Text>
+  </View>
+  <input
+    allowEmpty={true}
+    decimalSeparator=","
+    id="BBAS3"
+    inputType="tel"
+    onChangeEvent={[Function]}
+    placeholder="Valor a resgatar"
+    prefix="R$ "
+    style={
+      Object {
+        "height": 20,
+      }
+    }
+    thousandSeparator="."
+    type="text"
+    value={[MockFunction]}
+  />
+  <Text>
+    
+  </Text>
+</View>
+`;

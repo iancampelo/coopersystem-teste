@@ -12,12 +12,12 @@ import AcoesItem from '../../components/AcoesItem'
 import ResgateModal from '../../components/ResgateModal'
 
 const ResgateScreen = ({ navigation, route }) => {
-  const valorTotal = route.params.valorInvestimentos
-  const acoes = route.params.acoes
-  const nomeInvestimento = route.params.nome
+  const valorTotal = route.params?.valorInvestimentos
+  const acoes = route.params?.acoes
+  const nomeInvestimento = route.params?.nome
 
   var mappedAcoes = {}
-  acoes.forEach(acao => {
+  acoes?.forEach(acao => {
     mappedAcoes[acao.nome] = ''
   })
 

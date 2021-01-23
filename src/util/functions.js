@@ -5,6 +5,8 @@ export const percentualToValor = (valor, percentual) => {
 }
 
 export const normalizeMoneyString = (val) => {
+  if (!val)
+   return ''
   return val.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
 }
 

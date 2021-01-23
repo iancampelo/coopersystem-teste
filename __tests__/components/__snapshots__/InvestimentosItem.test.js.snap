@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly InvestimentosItem 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "height": 60,
+        "margin": 10,
+      },
+      Object {
+        "backgroundColor": "white",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "height": 60,
+        "padding": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      INVESTIMENTO I
+       - 
+      Minha aposentadoria
+    </Text>
+    <Text>
+      R$39,321.29
+    </Text>
+  </View>
+</View>
+`;
