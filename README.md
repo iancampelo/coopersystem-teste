@@ -9,3 +9,7 @@ Requisitos: [aqui](https://github.com/leonardo-coopersystem/avaliacao-coopersyst
   - Jest
 
 - Testes realizados na versão Web e Android
+
+Passos para executar o projeto:
+- yarn install
+- yarn web
